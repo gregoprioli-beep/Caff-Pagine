@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffè & Pagine | Libreria e Caffetteria a Sardara</title>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --c-bg: #FDFBF7;
+            --c-card: #FFFFFF;
+            --c-primary: #1C2826;
+            --c-accent: #C86D51;
+            --c-gold: #D4AF37;
+            --c-text: #2C2C2C;
+            --c-text-light: #6E6E6E;
+            --c-border: #E8E2D9;
+            --f-title: 'Bodoni Moda', serif;
+            --f-body: 'Montserrat', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--c-bg);
+            color: var(--c-text);
+            font-family: var(--f-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, .brand {
+            font-family: var(--f-title);
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: var(--c-text-light);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--c-border);
+            z-index: 1000;
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 8%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .brand {
+            font-size: 1.6rem;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .brand span {
+            color: var(--c-accent);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--c-primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--c-accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 8% 4rem;
+            background: linear-gradient(rgba(253, 251, 247, 0.85), rgba(253, 251, 247, 0.85)),
+                        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--c-accent);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--c-primary);
+            color: var(--c-bg);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            border: 1px solid var(--c-primary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--c-primary);
+        }
+
+        /* Section Layout */
+        section {
+            padding: 6rem 8%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header .subtitle {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--c-accent);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            background: var(--c-card);
+            padding: 2.5rem;
+            border: 1px solid var(--c-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .menu-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--c-border);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .menu-category h3 i {
+            color: var(--c-accent);
+            font-size: 1.2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--c-border);
+            flex-shrink: 0;
+        }
+
+        .menu-item-info {
+            flex-grow: 1;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-item-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--c-primary);
+        }
+
+        .menu-item-price {
+            font-family: var(--f-title);
+            font-weight: 600;
+            color: var(--c-accent);
+        }
+
+        .menu-item-desc {
+            font-size: 0.85rem;
+        }
+
+        /* Books Section */
+        .books-section {
+            background-color: rgba(232, 226, 217, 0.3);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .book-card {
+            background: var(--c-card);
+            border: 1px solid var(--c-border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .book-img-wrapper {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #f0ede6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-img {
+            transform: scale(1.05);
+        }
+
+        .book-content {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .book-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--c-accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .book-author {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--c-text-light);
+            margin-bottom: 1rem;
+        }
+
+        .book-review {
+            font-size: 0.88rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-footer {
+            border-top: 1px dashed var(--c-border);
+            padding-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--c-primary);
+            font-weight: 500;
+        }
+
+        .book-footer i {
+            color: var(--c-gold);
+        }
+
+        /* Hours & Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .info-box {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid var(--c-border);
+            background: var(--c-card);
+        }
+
+        .info-box i {
+            font-size: 2rem;
+            color: var(--c-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--c-border);
+            font-size: 0.9rem;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--c-primary);
+            color: #A0AAB0;
+            padding: 4rem 8% 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-logo {
+            font-family: var(--f-title);
+            font-size: 2rem;
+            color: var(--c-bg);
+            margin-bottom: 1rem;
+        }
+
+        .director-credit {
+            font-family: var(--f-title);
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--c-gold);
+            margin-top: 1.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--c-bg);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--c-accent);
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            color: #7A858C;
+        }
+
+        /* Scroll Animations Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-img {
+                width: 100%;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="brand">Caffè <span>&</span> Pagine</a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menù</a></li>
+            <li><a href="#libri">Consigli</a></li>
+            <li><a href="#orari">Orari</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content reveal">
+            <span class="hero-subtitle">Bistrot & Libreria a Sardara, Sardegna</span>
+            <h1>Un rifugio per l'anima e il palato</h1>
+            <p>Nel cuore storico di Sardara, dove l'aroma del caffè espresso appena macinato incontra il fascino della lettura. Prendi un libro, accomodati e lasciati ispirare.</p>
+            <a href="#menu" class="btn">Scopri il Menù del Giorno</a>
+        </div>
+    </header>
+
+    <!-- Menù Section -->
+    <section id="menu">
+        <div class="section-header reveal">
+            <span class="subtitle">Tradizioni & Sapori</span>
+            <h2>Il Menù del Giorno</h2>
+        </div>
+
+        <div class="menu-grid">
+            <!-- Caffetteria -->
+            <div class="menu-category reveal">
+                <h3><i class="fa-solid fa-mug-hot"></i> Caffetteria</h3>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=300&auto=format&fit=crop" alt="Espresso Italiano" class="menu-img">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <span class="menu-item-title">Espresso della Casa</span>
+                            <span class="menu-item-price">€ 1,50</span>
+                        </div>
+                        <p class="menu-item-desc">Miscela 100% Arabica, note intense di cacao e nocciola.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=300&auto=format&fit=crop" alt="Cappuccino Cremoso" class="menu-img">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <span class="menu-item-title">Cappuccino Cremoso</span>
+                            <span class="menu-item-price">€ 2,20</span>
+                        </div>
+                        <p class="menu-item-desc">Espresso con schiuma di latte fresco locale e cannella.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=300&auto=format&fit=crop" alt="Caffè Speciale" class="menu-img">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <span class="menu-item-title">Caffè del Lettore</span>
+                            <span class="menu-item-price">€ 3,50</span>
+                        </div>
+                        <p class="menu-item-desc">Espresso doppio, cioccolato fondente e panna montata.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pasticceria -->
+            <div class="menu-category reveal">
+                <h3><i class="fa-solid fa-cookie-bite"></i> Pasticceria</h3>
+                
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=300&auto=format&fit=crop" alt="Cornetto Artigianale" class="menu-img">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <span class="menu-item-title">Cornetto Artigianale</span>
+                            <span class="menu-item-price">€ 1,80</span>
+                        </div>
+                        <p class="menu-item-desc">Sfogliato a mano, ripieno di crema alla nocciola o pistacchio.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?q=80&w=300&auto=format&fit=crop" alt="Torta Artigianale" class="menu-img">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <span class="menu-item-title">Torta "Pagine d'Oro"</span>
+                            <span class="menu-item-price">€ 4,50</span>
+                        </div>
+                        <p class="menu-item-desc">Torta soffice alle mandorle sarde, fichi e miele biologico.</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=300&auto=format&fit=crop" alt="Dolci Sardi" class="menu-img">
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <span class="menu-item-title">Seadas Tradizionali</span>
+                            <span class="menu-item-price">€ 5,00</span>
+                        </div>
+                        <p class="menu-item-desc">Dolce tipico sardo con formaggio fresco, fritto e servito con miele calda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Recommendations -->
+    <section id="libri" class="books-section">
+        <div class="section-header reveal">
+            <span class="subtitle">Letture Consigliate</span>
+            <h2>I Libri del Mese</h2>
+        </div>
+
+        <div class="books-grid">
+            <div class="book-card reveal">
+                <div class="book-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop" alt="Libro Canne al vento" class="book-img">
+                </div>
+                <div class="book-content">
+                    <div>
+                        <span class="book-tag">Classico Sardo</span>
+                        <h3 class="book-title">Canne al vento</h3>
+                        <p class="book-author">Grazia Deledda</p>
+                        <p class="book-review">"Un capolavoro ambientato in Sardegna. Una riflessione profonda sul destino umano firmata dal Premio Nobel."</p>
+                    </div>
+                    <div class="book-footer">
+                        <i class="fa-solid fa-bookmark"></i> Consigliato per l'anima
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card reveal">
+                <div class="book-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=400&auto=format&fit=crop" alt="Libro Le città invisibili" class="book-img">
+                </div>
+                <div class="book-content">
+                    <div>
+                        <span class="book-tag">Letteratura Italiana</span>
+                        <h3 class="book-title">Le città invisibili</h3>
+                        <p class="book-author">Italo Calvino</p>
+                        <p class="book-review">"Un viaggio poetico tra immaginazione e realtà. Perfetto da gustare insieme a un espresso di mattina."</p>
+                    </div>
+                    <div class="book-footer">
+                        <i class="fa-solid fa-bookmark"></i> Consigliato per la riflessione
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-card reveal">
+                <div class="book-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=400&auto=format&fit=crop" alt="Libro L'amica geniale" class="book-img">
+                </div>
+                <div class="book-content">
+                    <div>
+                        <span class="book-tag">Narrativa Contemporanea</span>
+                        <h3 class="book-title">L'amica geniale</h3>
+                        <p class="book-author">Elena Ferrante</p>
+                        <p class="book-review">"Una storia travolgente sull'amicizia e la crescita. Impossibile staccarsi da queste pagine."</p>
+                    </div>
+                    <div class="book-footer">
+                        <i class="fa-solid fa-bookmark"></i> Consigliato per lunghe letture
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Hours & Location -->
+    <section id="orari">
+        <div class="section-header reveal">
+            <span class="subtitle">Vieni a Trovarci</span>
+            <h2>Orari & Informazioni</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box reveal">
+                <i class="fa-regular fa-clock"></i>
+                <h3>Orari di Apertura</h3>
+                <ul class="hours-list">
+                    <li><span>Lunedì - Venerdì</span> <span>07:30 - 20:00</span></li>
+                    <li><span>Sabato</span> <span>08:30 - 21:00</span></li>
+                    <li><span>Domenica</span> <span>09:00 - 18:00</span></li>
+                </ul>
+            </div>
+
+            <div class="info-box reveal">
+                <i class="fa-solid fa-location-dot"></i>
+                <h3>Dove Siamo</h3>
+                <p>Piazza Gramsci, 12<br>09030 Sardara (SU), Sardegna - Italia</p>
+                <p style="margin-top: 1rem;"><i class="fa-solid fa-phone" style="font-size: 1rem; color: var(--c-primary); margin:0;"></i> +39 070 938 1234</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Caffè & Pagine</div>
+            <p>Un punto d'incontro tra cultura, gusto e tranquillità nel cuore di Sardara.</p>
+            
+            <div class="director-credit">
+                Sotto la direzione di Donatella Bianchi
+            </div>
+
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Goodreads"><i class="fa-brands fa-goodreads-g"></i></a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 Caffè & Pagine. Tutti i diritti riservati.
+        </div>
+    </footer>
+
+    <!-- JavaScript Animations -->
+    <script>
+        // Navbar scroll behavior
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Animations (Reveal Effect)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.12
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
+</body>
+</html>
