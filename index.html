@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caffè & Pagine | Libreria e Caffetteria a Sardara</title>
     
-    <!-- Google Fonts & Font Awesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -367,8 +366,8 @@
             border-top: 1px dashed var(--c-border);
             padding-top: 1rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
             font-size: 0.8rem;
             color: var(--c-primary);
             font-weight: 500;
@@ -376,6 +375,21 @@
 
         .book-footer i {
             color: var(--c-gold);
+        }
+
+        .book-link {
+            color: var(--c-accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+
+        .book-link:hover {
+            color: var(--c-primary);
+            text-decoration: underline;
         }
 
         /* Hours & Info Section */
@@ -516,7 +530,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <a href="#" class="brand">Caffè <span>&</span> Pagine</a>
         <ul class="nav-links">
@@ -526,7 +539,6 @@
         </ul>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content reveal">
             <span class="hero-subtitle">Bistrot & Libreria a Sardara, Sardegna</span>
@@ -536,7 +548,6 @@
         </div>
     </header>
 
-    <!-- Menù Section -->
     <section id="menu">
         <div class="section-header reveal">
             <span class="subtitle">Tradizioni & Sapori</span>
@@ -544,7 +555,6 @@
         </div>
 
         <div class="menu-grid">
-            <!-- Caffetteria -->
             <div class="menu-category reveal">
                 <h3><i class="fa-solid fa-mug-hot"></i> Caffetteria</h3>
                 
@@ -582,7 +592,6 @@
                 </div>
             </div>
 
-            <!-- Pasticceria -->
             <div class="menu-category reveal">
                 <h3><i class="fa-solid fa-cookie-bite"></i> Pasticceria</h3>
                 
@@ -622,7 +631,6 @@
         </div>
     </section>
 
-    <!-- Book Recommendations -->
     <section id="libri" class="books-section">
         <div class="section-header reveal">
             <span class="subtitle">Letture Consigliate</span>
@@ -632,17 +640,18 @@
         <div class="books-grid">
             <div class="book-card reveal">
                 <div class="book-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop" alt="Libro Canne al vento" class="book-img">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop" alt="Libro Dodici mesi per amare" class="book-img">
                 </div>
                 <div class="book-content">
                     <div>
-                        <span class="book-tag">Classico Sardo</span>
-                        <h3 class="book-title">Canne al vento</h3>
-                        <p class="book-author">Grazia Deledda</p>
-                        <p class="book-review">"Un capolavoro ambientato in Sardegna. Una riflessione profonda sul destino umano firmata dal Premio Nobel."</p>
+                        <span class="book-tag">Romanzo Rosa</span>
+                        <h3 class="book-title">Doze Meses Para Amar</h3>
+                        <p class="book-author">GSPrioli</p>
+                        <p class="book-review">"Un'emozionante storia d'amore intensa e coinvolgente. Una lettura ideale da accompagnare a una tazza di caffè fumante."</p>
                     </div>
                     <div class="book-footer">
-                        <i class="fa-solid fa-bookmark"></i> Consigliato per l'anima
+                        <span><i class="fa-solid fa-bookmark"></i> Novità</span>
+                        <a href="https://www.wattpad.com/story/415532931-doze-meses-para-amar" target="_blank" rel="noopener noreferrer" class="book-link">Leggi su Wattpad <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
@@ -659,7 +668,8 @@
                         <p class="book-review">"Un viaggio poetico tra immaginazione e realtà. Perfetto da gustare insieme a un espresso di mattina."</p>
                     </div>
                     <div class="book-footer">
-                        <i class="fa-solid fa-bookmark"></i> Consigliato per la riflessione
+                        <span><i class="fa-solid fa-bookmark"></i> Consigliato</span>
+                        <span>Classico</span>
                     </div>
                 </div>
             </div>
@@ -676,14 +686,14 @@
                         <p class="book-review">"Una storia travolgente sull'amicizia e la crescita. Impossibile staccarsi da queste pagine."</p>
                     </div>
                     <div class="book-footer">
-                        <i class="fa-solid fa-bookmark"></i> Consigliato per lunghe letture
+                        <span><i class="fa-solid fa-bookmark"></i> Consigliato</span>
+                        <span>Best Seller</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Opening Hours & Location -->
     <section id="orari">
         <div class="section-header reveal">
             <span class="subtitle">Vieni a Trovarci</span>
@@ -710,7 +720,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Caffè & Pagine</div>
@@ -732,7 +741,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript Animations -->
     <script>
         // Navbar scroll behavior
         const navbar = document.getElementById('navbar');
