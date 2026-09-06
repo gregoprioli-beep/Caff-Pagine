@@ -88,6 +88,12 @@
             font-style: italic;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-links {
             display: flex;
             gap: 2.5rem;
@@ -119,6 +125,73 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Language Switcher Dropdown Custom */
+        .lang-switcher {
+            position: relative;
+            user-select: none;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--c-card);
+            border: 1px solid var(--c-border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--c-primary);
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--c-accent);
+        }
+
+        .flag-icon {
+            width: 18px;
+            height: 13px;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background: var(--c-card);
+            border: 1px solid var(--c-border);
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            list-style: none;
+            padding: 0.5rem 0;
+            display: none;
+            min-width: 150px;
+            z-index: 1001;
+        }
+
+        .lang-dropdown.active {
+            display: block;
+        }
+
+        .lang-dropdown li {
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .lang-dropdown li:hover {
+            background-color: var(--c-bg);
+            color: var(--c-accent);
         }
 
         /* Hero Section */
@@ -508,6 +581,11 @@
                 padding: 1rem;
             }
 
+            .nav-right {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
             .nav-links {
                 gap: 1.2rem;
             }
@@ -532,40 +610,57 @@
 
     <nav class="navbar" id="navbar">
         <a href="#" class="brand">Caffè <span>&</span> Pagine</a>
-        <ul class="nav-links">
-            <li><a href="#menu">Menù</a></li>
-            <li><a href="#libri">Consigli</a></li>
-            <li><a href="#orari">Orari</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#menu" data-i18n="nav-menu">Menù</a></li>
+                <li><a href="#libri" data-i18n="nav-books">Consigli</a></li>
+                <li><a href="#orari" data-i18n="nav-hours">Orari</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <div class="lang-btn" id="langBtn">
+                    <img src="https://flagcdn.com/w40/it.png" class="flag-icon" id="currentFlag" alt="IT">
+                    <span id="currentLangText">IT</span>
+                    <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left: 2px;"></i>
+                </div>
+                <ul class="lang-dropdown" id="langDropdown">
+                    <li data-lang="it" data-flag="https://flagcdn.com/w40/it.png"><img src="https://flagcdn.com/w40/it.png" class="flag-icon" alt="IT"> Italiano</li>
+                    <li data-lang="en" data-flag="https://flagcdn.com/w40/gb.png"><img src="https://flagcdn.com/w40/gb.png" class="flag-icon" alt="EN"> English</li>
+                    <li data-lang="es" data-flag="https://flagcdn.com/w40/es.png"><img src="https://flagcdn.com/w40/es.png" class="flag-icon" alt="ES"> Español</li>
+                    <li data-lang="pt-br" data-flag="https://flagcdn.com/w40/br.png"><img src="https://flagcdn.com/w40/br.png" class="flag-icon" alt="PT-BR"> Português (BR)</li>
+                    <li data-lang="pt-pt" data-flag="https://flagcdn.com/w40/pt.png"><img src="https://flagcdn.com/w40/pt.png" class="flag-icon" alt="PT-PT"> Português (PT)</li>
+                    <li data-lang="fr" data-flag="https://flagcdn.com/w40/fr.png"><img src="https://flagcdn.com/w40/fr.png" class="flag-icon" alt="FR"> Français</li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content reveal">
-            <span class="hero-subtitle">Bistrot & Libreria a Sardara, Sardegna</span>
-            <h1>Un rifugio per l'anima e il palato</h1>
-            <p>Nel cuore storico di Sardara, dove l'aroma del caffè espresso appena macinato incontra il fascino della lettura. Prendi un libro, accomodati e lasciati ispirare.</p>
-            <a href="#menu" class="btn">Scopri il Menù del Giorno</a>
+            <span class="hero-subtitle" data-i18n="hero-subtitle">Bistrot & Libreria a Sardara, Sardegna</span>
+            <h1 data-i18n="hero-title">Un rifugio per l'anima e il palato</h1>
+            <p data-i18n="hero-desc">Nel cuore storico di Sardara, dove l'aroma del caffè espresso appena macinato incontra il fascino della lettura. Prendi un libro, accomodati e lasciati ispirare.</p>
+            <a href="#menu" class="btn" data-i18n="hero-btn">Scopri il Menù del Giorno</a>
         </div>
     </header>
 
     <section id="menu">
         <div class="section-header reveal">
-            <span class="subtitle">Tradizioni & Sapori</span>
-            <h2>Il Menù del Giorno</h2>
+            <span class="subtitle" data-i18n="menu-subtitle">Tradizioni & Sapori</span>
+            <h2 data-i18n="menu-title">Il Menù del Giorno</h2>
         </div>
 
         <div class="menu-grid">
             <div class="menu-category reveal">
-                <h3><i class="fa-solid fa-mug-hot"></i> Caffetteria</h3>
+                <h3><i class="fa-solid fa-mug-hot"></i> <span data-i18n="cat-coffee">Caffetteria</span></h3>
                 
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=300&auto=format&fit=crop" alt="Espresso Italiano" class="menu-img">
                     <div class="menu-item-info">
                         <div class="menu-item-header">
-                            <span class="menu-item-title">Espresso della Casa</span>
+                            <span class="menu-item-title" data-i18n="item-espresso-title">Espresso della Casa</span>
                             <span class="menu-item-price">€ 1,50</span>
                         </div>
-                        <p class="menu-item-desc">Miscela 100% Arabica, note intense di cacao e nocciola.</p>
+                        <p class="menu-item-desc" data-i18n="item-espresso-desc">Miscela 100% Arabica, note intense di cacao e nocciola.</p>
                     </div>
                 </div>
 
@@ -573,10 +668,10 @@
                     <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=300&auto=format&fit=crop" alt="Cappuccino Cremoso" class="menu-img">
                     <div class="menu-item-info">
                         <div class="menu-item-header">
-                            <span class="menu-item-title">Cappuccino Cremoso</span>
+                            <span class="menu-item-title" data-i18n="item-cappuccino-title">Cappuccino Cremoso</span>
                             <span class="menu-item-price">€ 2,20</span>
                         </div>
-                        <p class="menu-item-desc">Espresso con schiuma di latte fresco locale e cannella.</p>
+                        <p class="menu-item-desc" data-i18n="item-cappuccino-desc">Espresso con schiuma di latte fresco locale e cannella.</p>
                     </div>
                 </div>
 
@@ -584,25 +679,25 @@
                     <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=300&auto=format&fit=crop" alt="Caffè Speciale" class="menu-img">
                     <div class="menu-item-info">
                         <div class="menu-item-header">
-                            <span class="menu-item-title">Caffè del Lettore</span>
+                            <span class="menu-item-title" data-i18n="item-reader-title">Caffè del Lettore</span>
                             <span class="menu-item-price">€ 3,50</span>
                         </div>
-                        <p class="menu-item-desc">Espresso doppio, cioccolato fondente e panna montata.</p>
+                        <p class="menu-item-desc" data-i18n="item-reader-desc">Espresso doppio, cioccolato fondente e panna montata.</p>
                     </div>
                 </div>
             </div>
 
             <div class="menu-category reveal">
-                <h3><i class="fa-solid fa-cookie-bite"></i> Pasticceria</h3>
+                <h3><i class="fa-solid fa-cookie-bite"></i> <span data-i18n="cat-pastry">Pasticceria</span></h3>
                 
                 <div class="menu-item">
                     <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=300&auto=format&fit=crop" alt="Cornetto Artigianale" class="menu-img">
                     <div class="menu-item-info">
                         <div class="menu-item-header">
-                            <span class="menu-item-title">Cornetto Artigianale</span>
+                            <span class="menu-item-title" data-i18n="item-croissant-title">Cornetto Artigianale</span>
                             <span class="menu-item-price">€ 1,80</span>
                         </div>
-                        <p class="menu-item-desc">Sfogliato a mano, ripieno di crema alla nocciola o pistacchio.</p>
+                        <p class="menu-item-desc" data-i18n="item-croissant-desc">Sfogliato a mano, ripieno di crema alla nocciola o pistacchio.</p>
                     </div>
                 </div>
 
@@ -610,10 +705,10 @@
                     <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?q=80&w=300&auto=format&fit=crop" alt="Torta Artigianale" class="menu-img">
                     <div class="menu-item-info">
                         <div class="menu-item-header">
-                            <span class="menu-item-title">Torta "Pagine d'Oro"</span>
+                            <span class="menu-item-title" data-i18n="item-cake-title">Torta "Pagine d'Oro"</span>
                             <span class="menu-item-price">€ 4,50</span>
                         </div>
-                        <p class="menu-item-desc">Torta soffice alle mandorle sarde, fichi e miele biologico.</p>
+                        <p class="menu-item-desc" data-i18n="item-cake-desc">Torta soffice alle mandorle sarde, fichi e miele biologico.</p>
                     </div>
                 </div>
 
@@ -621,10 +716,10 @@
                     <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=300&auto=format&fit=crop" alt="Dolci Sardi" class="menu-img">
                     <div class="menu-item-info">
                         <div class="menu-item-header">
-                            <span class="menu-item-title">Seadas Tradizionali</span>
+                            <span class="menu-item-title" data-i18n="item-seadas-title">Seadas Tradizionali</span>
                             <span class="menu-item-price">€ 5,00</span>
                         </div>
-                        <p class="menu-item-desc">Dolce tipico sardo con formaggio fresco, fritto e servito con miele calda.</p>
+                        <p class="menu-item-desc" data-i18n="item-seadas-desc">Dolce tipico sardo con formaggio fresco, fritto e servito con miele calda.</p>
                     </div>
                 </div>
             </div>
@@ -633,8 +728,8 @@
 
     <section id="libri" class="books-section">
         <div class="section-header reveal">
-            <span class="subtitle">Letture Consigliate</span>
-            <h2>I Libri del Mese</h2>
+            <span class="subtitle" data-i18n="books-subtitle">Letture Consigliate</span>
+            <h2 data-i18n="books-title">I Libri del Mese</h2>
         </div>
 
         <div class="books-grid">
@@ -644,14 +739,14 @@
                 </div>
                 <div class="book-content">
                     <div>
-                        <span class="book-tag">Romanzo Rosa</span>
+                        <span class="book-tag" data-i18n="tag-romance">Romanzo Rosa</span>
                         <h3 class="book-title">Doze Meses Para Amar</h3>
                         <p class="book-author">GSPrioli</p>
-                        <p class="book-review">"Un'emozionante storia d'amore intensa e coinvolgente. Una lettura ideale da accompagnare a una tazza di caffè fumante."</p>
+                        <p class="book-review" data-i18n="review-doze">"Un'emozionante storia d'amore intensa e coinvolgente. Una lettura ideale da accompagnare a una tazza di caffè fumante."</p>
                     </div>
                     <div class="book-footer">
-                        <span><i class="fa-solid fa-bookmark"></i> Novità</span>
-                        <a href="https://www.wattpad.com/story/415532931-doze-meses-para-amar" target="_blank" rel="noopener noreferrer" class="book-link">Leggi su Wattpad <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <span><i class="fa-solid fa-bookmark"></i> <span data-i18n="tag-new">Novità</span></span>
+                        <a href="https://www.wattpad.com/story/415532931-doze-meses-para-amar" target="_blank" rel="noopener noreferrer" class="book-link"><span data-i18n="link-read">Leggi su Wattpad</span> <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
@@ -662,14 +757,14 @@
                 </div>
                 <div class="book-content">
                     <div>
-                        <span class="book-tag">Letteratura Italiana</span>
+                        <span class="book-tag" data-i18n="tag-ital-lit">Letteratura Italiana</span>
                         <h3 class="book-title">Le città invisibili</h3>
                         <p class="book-author">Italo Calvino</p>
-                        <p class="book-review">"Un viaggio poetico tra immaginazione e realtà. Perfetto da gustare insieme a un espresso di mattina."</p>
+                        <p class="book-review" data-i18n="review-calvino">"Un viaggio poetico tra immaginazione e realtà. Perfetto da gustare insieme a un espresso di mattina."</p>
                     </div>
                     <div class="book-footer">
-                        <span><i class="fa-solid fa-bookmark"></i> Consigliato</span>
-                        <span>Classico</span>
+                        <span><i class="fa-solid fa-bookmark"></i> <span data-i18n="tag-recommended">Consigliato</span></span>
+                        <span data-i18n="tag-classic">Classico</span>
                     </div>
                 </div>
             </div>
@@ -680,13 +775,13 @@
                 </div>
                 <div class="book-content">
                     <div>
-                        <span class="book-tag">Narrativa Contemporanea</span>
+                        <span class="book-tag" data-i18n="tag-contemp">Narrativa Contemporanea</span>
                         <h3 class="book-title">L'amica geniale</h3>
                         <p class="book-author">Elena Ferrante</p>
-                        <p class="book-review">"Una storia travolgente sull'amicizia e la crescita. Impossibile staccarsi da queste pagine."</p>
+                        <p class="book-review" data-i18n="review-ferrante">"Una storia travolgente sull'amicizia e la crescita. Impossibile staccarsi da queste pagine."</p>
                     </div>
                     <div class="book-footer">
-                        <span><i class="fa-solid fa-bookmark"></i> Consigliato</span>
+                        <span><i class="fa-solid fa-bookmark"></i> <span data-i18n="tag-recommended">Consigliato</span></span>
                         <span>Best Seller</span>
                     </div>
                 </div>
@@ -696,24 +791,24 @@
 
     <section id="orari">
         <div class="section-header reveal">
-            <span class="subtitle">Vieni a Trovarci</span>
-            <h2>Orari & Informazioni</h2>
+            <span class="subtitle" data-i18n="hours-subtitle">Vieni a Trovarci</span>
+            <h2 data-i18n="hours-title">Orari & Informazioni</h2>
         </div>
 
         <div class="info-grid">
             <div class="info-box reveal">
                 <i class="fa-regular fa-clock"></i>
-                <h3>Orari di Apertura</h3>
+                <h3 data-i18n="opening-hours-title">Orari di Apertura</h3>
                 <ul class="hours-list">
-                    <li><span>Lunedì - Venerdì</span> <span>07:30 - 20:00</span></li>
-                    <li><span>Sabato</span> <span>08:30 - 21:00</span></li>
-                    <li><span>Domenica</span> <span>09:00 - 18:00</span></li>
+                    <li><span data-i18n="days-week">Lunedì - Venerdì</span> <span>07:30 - 20:00</span></li>
+                    <li><span data-i18n="days-sat">Sabato</span> <span>08:30 - 21:00</span></li>
+                    <li><span data-i18n="days-sun">Domenica</span> <span>09:00 - 18:00</span></li>
                 </ul>
             </div>
 
             <div class="info-box reveal">
                 <i class="fa-solid fa-location-dot"></i>
-                <h3>Dove Siamo</h3>
+                <h3 data-i18n="location-title">Dove Siamo</h3>
                 <p>Piazza Gramsci, 12<br>09030 Sardara (SU), Sardegna - Italia</p>
                 <p style="margin-top: 1rem;"><i class="fa-solid fa-phone" style="font-size: 1rem; color: var(--c-primary); margin:0;"></i> +39 070 938 1234</p>
             </div>
@@ -723,9 +818,9 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Caffè & Pagine</div>
-            <p>Un punto d'incontro tra cultura, gusto e tranquillità nel cuore di Sardara.</p>
+            <p data-i18n="footer-desc">Un punto d'incontro tra cultura, gusto e tranquillità nel cuore di Sardara.</p>
             
-            <div class="director-credit">
+            <div class="director-credit" data-i18n="footer-director">
                 Sotto la direzione di Michela Mereu
             </div>
 
@@ -736,7 +831,7 @@
             </div>
         </div>
 
-        <div class="copyright">
+        <div class="copyright" data-i18n="copyright">
             &copy; By Grego Prioli 2026 Caffè & Pagine. Tutti i diritti riservati.
         </div>
     </footer>
@@ -768,6 +863,333 @@
         revealElements.forEach(element => {
             revealObserver.observe(element);
         });
+
+        // Dictionary for translations
+        const translations = {
+            "it": {
+                "nav-menu": "Menù",
+                "nav-books": "Consigli",
+                "nav-hours": "Orari",
+                "hero-subtitle": "Bistrot & Libreria a Sardara, Sardegna",
+                "hero-title": "Un rifugio per l'anima e il palato",
+                "hero-desc": "Nel cuore storico di Sardara, dove l'aroma del caffè espresso appena macinato incontra il fascino della lettura. Prendi un libro, accomodati e lasciati ispirare.",
+                "hero-btn": "Scopri il Menù del Giorno",
+                "menu-subtitle": "Tradizioni & Sapori",
+                "menu-title": "Il Menù del Giorno",
+                "cat-coffee": "Caffetteria",
+                "item-espresso-title": "Espresso della Casa",
+                "item-espresso-desc": "Miscela 100% Arabica, note intense di cacao e nocciola.",
+                "item-cappuccino-title": "Cappuccino Cremoso",
+                "item-cappuccino-desc": "Espresso con schiuma di latte fresco locale e cannella.",
+                "item-reader-title": "Caffè del Lettore",
+                "item-reader-desc": "Espresso doppio, cioccolato fondente e panna montata.",
+                "cat-pastry": "Pasticceria",
+                "item-croissant-title": "Cornetto Artigianale",
+                "item-croissant-desc": "Sfogliato a mano, ripieno di crema alla nocciola o pistacchio.",
+                "item-cake-title": "Torta \"Pagine d'Oro\"",
+                "item-cake-desc": "Torta soffice alle mandorle sarde, fichi e miele biologico.",
+                "item-seadas-title": "Seadas Tradizionali",
+                "item-seadas-desc": "Dolce tipico sardo con formaggio fresco, fritto e servito con miele calda.",
+                "books-subtitle": "Letture Consigliate",
+                "books-title": "I Libri del Mese",
+                "tag-romance": "Romanzo Rosa",
+                "review-doze": "\"Un'emozionante storia d'amore intensa e coinvolgente. Una lettura ideale da accompagnare a una tazza di caffè fumante.\"",
+                "tag-new": "Novità",
+                "link-read": "Leggi su Wattpad",
+                "tag-ital-lit": "Letteratura Italiana",
+                "review-calvino": "\"Un viaggio poetico tra immaginazione e realtà. Perfetto da gustare insieme a un espresso di mattina.\"",
+                "tag-recommended": "Consigliato",
+                "tag-classic": "Classico",
+                "tag-contemp": "Narrativa Contemporanea",
+                "review-ferrante": "\"Una storia travolgente sull'amicizia e la crescita. Impossibile staccarsi da queste pagine.\"",
+                "hours-subtitle": "Vieni a Trovarci",
+                "hours-title": "Orari & Informazioni",
+                "opening-hours-title": "Orari di Apertura",
+                "days-week": "Lunedì - Venerdì",
+                "days-sat": "Sabato",
+                "days-sun": "Domenica",
+                "location-title": "Dove Siamo",
+                "footer-desc": "Un punto d'incontro tra cultura, gusto e tranquillità nel cuore di Sardara.",
+                "footer-director": "Sotto la direzione di Michela Mereu",
+                "copyright": "© By Grego Prioli 2026 Caffè & Pagine. Tutti i diritti riservati."
+            },
+            "en": {
+                "nav-menu": "Menu",
+                "nav-books": "Recommendations",
+                "nav-hours": "Hours",
+                "hero-subtitle": "Bistrot & Bookstore in Sardara, Sardinia",
+                "hero-title": "A haven for the soul and the palate",
+                "hero-desc": "In the historic heart of Sardara, where the aroma of freshly ground espresso meets the charm of reading. Grab a book, take a seat, and get inspired.",
+                "hero-btn": "Discover the Menu of the Day",
+                "menu-subtitle": "Traditions & Flavors",
+                "menu-title": "Menu of the Day",
+                "cat-coffee": "Coffee Shop",
+                "item-espresso-title": "House Espresso",
+                "item-espresso-desc": "100% Arabica blend, intense notes of cocoa and hazelnut.",
+                "item-cappuccino-title": "Creamy Cappuccino",
+                "item-cappuccino-desc": "Espresso with fresh local milk froth and cinnamon.",
+                "item-reader-title": "Reader's Coffee",
+                "item-reader-desc": "Double espresso, dark chocolate, and whipped cream.",
+                "cat-pastry": "Pastry",
+                "item-croissant-title": "Artisanal Croissant",
+                "item-croissant-desc": "Hand-folded, filled with hazelnut or pistachio cream.",
+                "item-cake-title": "\"Golden Pages\" Cake",
+                "item-cake-desc": "Soft Sardinian almond cake, figs, and organic honey.",
+                "item-seadas-title": "Traditional Seadas",
+                "item-seadas-desc": "Typical Sardinian sweet with fresh cheese, fried and served with warm honey.",
+                "books-subtitle": "Recommended Reads",
+                "books-title": "Books of the Month",
+                "tag-romance": "Romance Novel",
+                "review-doze": "\"An exciting, intense, and engaging love story. An ideal read to accompany a steaming cup of coffee.\"",
+                "tag-new": "New",
+                "link-read": "Read on Wattpad",
+                "tag-ital-lit": "Italian Literature",
+                "review-calvino": "\"A poetic journey between imagination and reality. Perfect to enjoy alongside a morning espresso.\"",
+                "tag-recommended": "Recommended",
+                "tag-classic": "Classic",
+                "tag-contemp": "Contemporary Fiction",
+                "review-ferrante": "\"A captivating story about friendship and growth. Impossible to put down.\"",
+                "hours-subtitle": "Come Visit Us",
+                "hours-title": "Hours & Information",
+                "opening-hours-title": "Opening Hours",
+                "days-week": "Monday - Friday",
+                "days-sat": "Saturday",
+                "days-sun": "Sunday",
+                "location-title": "Location",
+                "footer-desc": "A meeting point for culture, taste, and tranquility in the heart of Sardara.",
+                "footer-director": "Under the direction of Michela Mereu",
+                "copyright": "© By Grego Prioli 2026 Caffè & Pagine. All rights reserved."
+            },
+            "es": {
+                "nav-menu": "Menú",
+                "nav-books": "Recomendaciones",
+                "nav-hours": "Horarios",
+                "hero-subtitle": "Bistrot y Librería en Sardara, Cerdeña",
+                "hero-title": "Un refugio para el alma y el paladar",
+                "hero-desc": "En el centro histórico de Sardara, donde el aroma del café espresso recién molido se une al encanto de la lectura. Toma un libro, acomódate e inspírate.",
+                "hero-btn": "Descubre el Menú del Día",
+                "menu-subtitle": "Tradiciones y Sabores",
+                "menu-title": "El Menú del Día",
+                "cat-coffee": "Cafetería",
+                "item-espresso-title": "Espresso de la Casa",
+                "item-espresso-desc": "Mezcla 100% Arábica, notas intensas de cacao y avellana.",
+                "item-cappuccino-title": "Capuchino Cremoso",
+                "item-cappuccino-desc": "Espresso con espuma de leche fresca local y canela.",
+                "item-reader-title": "Café del Lector",
+                "item-reader-desc": "Espresso doble, chocolate negro y nata montada.",
+                "cat-pastry": "Pastelería",
+                "item-croissant-title": "Cruasán Artesanal",
+                "item-croissant-desc": "Hojaldrado a mano, relleno de crema de avellana o pistacho.",
+                "item-cake-title": "Pastel \"Páginas de Oro\"",
+                "item-cake-desc": "Bizcocho esponjoso de almendras sardas, higos y miel orgánica.",
+                "item-seadas-title": "Seadas Tradicionales",
+                "item-seadas-desc": "Dulce típico sardo con queso fresco, frito y servido con miel caliente.",
+                "books-subtitle": "Lecturas Recomendadas",
+                "books-title": "Los Libros del Mes",
+                "tag-romance": "Novela Romántica",
+                "review-doze": "\"Una emocionante historia de amor intensa y cautivadora. Una lectura ideal para acompañar una taza de café humeante.\"",
+                "tag-new": "Novedad",
+                "link-read": "Leer en Wattpad",
+                "tag-ital-lit": "Literatura Italiana",
+                "review-calvino": "\"Un viaje poético entre la imaginación y la realidad. Perfecto para disfrutar junto a un espresso matutino.\"",
+                "tag-recommended": "Recomendado",
+                "tag-classic": "Clásico",
+                "tag-contemp": "Narrativa Contemporánea",
+                "review-ferrante": "\"Una historia cautivadora sobre la amistad y el crecimiento. Imposible soltar estas páginas.\"",
+                "hours-subtitle": "Ven a Visitarnos",
+                "hours-title": "Horarios e Información",
+                "opening-hours-title": "Horario de Apertura",
+                "days-week": "Lunes - Viernes",
+                "days-sat": "Sábado",
+                "days-sun": "Domingo",
+                "location-title": "Dónde Estamos",
+                "footer-desc": "Un punto de encuentro entre cultura, sabor y tranquilidad en el corazón de Sardara.",
+                "footer-director": "Bajo la dirección de Michela Mereu",
+                "copyright": "© By Grego Prioli 2026 Caffè & Pagine. Todos los derechos reservados."
+            },
+            "pt-br": {
+                "nav-menu": "Menu",
+                "nav-books": "Recomendações",
+                "nav-hours": "Horários",
+                "hero-subtitle": "Bistrô & Livraria em Sardara, Sardenha",
+                "hero-title": "Um refúgio para a alma e o paladar",
+                "hero-desc": "No coração histórico de Sardara, onde o aroma do café espresso moído na hora se junta ao encanto da leitura. Pegue um livro, acomode-se e inspire-se.",
+                "hero-btn": "Descubra o Menu do Dia",
+                "menu-subtitle": "Tradições & Sabores",
+                "menu-title": "O Menu do Dia",
+                "cat-coffee": "Cafeteria",
+                "item-espresso-title": "Espresso da Casa",
+                "item-espresso-desc": "Blend 100% Arábica, notas intensas de cacau e avelã.",
+                "item-cappuccino-title": "Cappuccino Cremoso",
+                "item-cappuccino-desc": "Espresso com espuma de leite fresco local e canela.",
+                "item-reader-title": "Café do Leitor",
+                "item-reader-desc": "Espresso duplo, chocolate amargo e chantilly.",
+                "cat-pastry": "Confeitaria",
+                "item-croissant-title": "Croissant Artesanal",
+                "item-croissant-desc": "Folhado à mão, recheado com creme de avelã ou pistache.",
+                "item-cake-title": "Bolo \"Páginas de Ouro\"",
+                "item-cake-desc": "Bolo fofinho de amêndoas da Sardenha, figos e mel orgânico.",
+                "item-seadas-title": "Seadas Tradicionais",
+                "item-seadas-desc": "Doce típico da Sardenha com queijo fresco, frito e servido com mel quente.",
+                "books-subtitle": "Leituras Recomendadas",
+                "books-title": "Os Livros do Mês",
+                "tag-romance": "Romance",
+                "review-doze": "\"Uma emocionante história de amor intensa e envolvente. Uma leitura ideal para acompanhar uma xícara de café fumegante.\"",
+                "tag-new": "Novidade",
+                "link-read": "Ler no Wattpad",
+                "tag-ital-lit": "Literatura Italiana",
+                "review-calvino": "\"Uma viagem poética entre a imaginação e a realidade. Perfeito para saborear com um espresso pela manhã.\"",
+                "tag-recommended": "Recomendado",
+                "tag-classic": "Clássico",
+                "tag-contemp": "Ficção Contemporânea",
+                "review-ferrante": "\"Uma história envolvente sobre amizade e crescimento. Impossível largar estas páginas.\"",
+                "hours-subtitle": "Venha nos Visitar",
+                "hours-title": "Horários & Informações",
+                "opening-hours-title": "Horário de Funcionamento",
+                "days-week": "Segunda - Sexta",
+                "days-sat": "Sábado",
+                "days-sun": "Domingo",
+                "location-title": "Onde Estamos",
+                "footer-desc": "Um ponto de encontro entre cultura, sabor e tranquilidade no coração de Sardara.",
+                "footer-director": "Sob a direção de Michela Mereu",
+                "copyright": "© By Grego Prioli 2026 Caffè & Pagine. Todos os direitos reservados."
+            },
+            "pt-pt": {
+                "nav-menu": "Menu",
+                "nav-books": "Recomendações",
+                "nav-hours": "Horários",
+                "hero-subtitle": "Bistrô & Livraria em Sardara, Sardenha",
+                "hero-title": "Um refúgio para a alma e o paladar",
+                "hero-desc": "No coração histórico de Sardara, onde o aroma do café expresso moído na hora se junta ao encanto da leitura. Pegue num livro, sente-se e inspire-se.",
+                "hero-btn": "Descubra o Menu do Dia",
+                "menu-subtitle": "Tradições & Sabores",
+                "menu-title": "O Menu do Dia",
+                "cat-coffee": "Cafetaria",
+                "item-espresso-title": "Expresso da Casa",
+                "item-espresso-desc": "Lote 100% Arábica, notas intensas de cacau e avelã.",
+                "item-cappuccino-title": "Cappuccino Cremoso",
+                "item-cappuccino-desc": "Expresso com espuma de leite fresco local e canela.",
+                "item-reader-title": "Café do Leitor",
+                "item-reader-desc": "Expresso duplo, chocolate negro e chantilly.",
+                "cat-pastry": "Pastelaria",
+                "item-croissant-title": "Croissant Artesanal",
+                "item-croissant-desc": "Folhado à mão, recheado com creme de avelã ou pistácio.",
+                "item-cake-title": "Bolo \"Páginas de Ouro\"",
+                "item-cake-desc": "Bolo fofo de amêndoa da Sardenha, figos e mel biológico.",
+                "item-seadas-title": "Seadas Tradicionais",
+                "item-seadas-desc": "Doce típico da Sardenha com queijo fresco, frito e servido com mel quente.",
+                "books-subtitle": "Leituras Recomendadas",
+                "books-title": "Os Livros do Mês",
+                "tag-romance": "Romance",
+                "review-doze": "\"Uma emocionante história de amor intensa e envolvente. Uma leitura ideal para acompanhar uma chávena de café a fumegar.\"",
+                "tag-new": "Novidade",
+                "link-read": "Ler no Wattpad",
+                "tag-ital-lit": "Literatura Italiana",
+                "review-calvino": "\"Uma viagem poética entre a imaginação e a realidade. Perfeito para saborear com um expresso de manhã.\"",
+                "tag-recommended": "Recomendado",
+                "tag-classic": "Clássico",
+                "tag-contemp": "Ficção Contemporânea",
+                "review-ferrante": "\"Uma história envolvente sobre amizade e crescimento. Impossível largar estas páginas.\"",
+                "hours-subtitle": "Venha Visitar-nos",
+                "hours-title": "Horários & Informações",
+                "opening-hours-title": "Horário de Abertura",
+                "days-week": "Segunda - Sexta",
+                "days-sat": "Sábado",
+                "days-sun": "Domingo",
+                "location-title": "Onde Estamos",
+                "footer-desc": "Um ponto de encontro entre cultura, sabor e tranquilidade no coração de Sardara.",
+                "footer-director": "Sob a direção de Michela Mereu",
+                "copyright": "© By Grego Prioli 2026 Caffè & Pagine. Todos os direitos reservados."
+            },
+            "fr": {
+                "nav-menu": "Menu",
+                "nav-books": "Conseils",
+                "nav-hours": "Horaires",
+                "hero-subtitle": "Bistrot & Librairie à Sardara, Sardaigne",
+                "hero-title": "Un havre pour l'âme et le palais",
+                "hero-desc": "Au cœur historique de Sardara, où l'arôme du café expresso fraîchement moulu rencontre le charme de la lecture. Prenez un livre, installez-vous et laissez-vous inspirer.",
+                "hero-btn": "Découvrez le Menu du Jour",
+                "menu-subtitle": "Traditions & Saveurs",
+                "menu-title": "Le Menu du Jour",
+                "cat-coffee": "Cafétéria",
+                "item-espresso-title": "Expresso della Casa",
+                "item-espresso-desc": "Mélange 100% Arabica, notes intenses de cacao et de noisette.",
+                "item-cappuccino-title": "Cappuccino Onctueux",
+                "item-cappuccino-desc": "Expresso avec mousse de lait frais local et cannelle.",
+                "item-reader-title": "Café du Lecteur",
+                "item-reader-desc": "Double expresso, chocolat noir et crème fouettée.",
+                "cat-pastry": "Pâtisserie",
+                "item-croissant-title": "Croissant Artisanal",
+                "item-croissant-desc": "Feuilleté à la main, fourré à la crème de noisette ou de pistache.",
+                "item-cake-title": "Gâteau \"Pages d'Or\"",
+                "item-cake-desc": "Gâteau moelleux aux amandes de Sardaigne, figues et miel biologique.",
+                "item-seadas-title": "Seadas Traditionnelles",
+                "item-seadas-desc": "Pâtisserie typique de Sardaigne au fromage frais, frite et servie avec du miel chaud.",
+                "books-subtitle": "Lectures Recommandées",
+                "books-title": "Les Livres du Mois",
+                "tag-romance": "Roman d'Amour",
+                "review-doze": "\"Une histoire d'amour passionnante, intense et captivante. Une lecture idéale à accompagner d'une tasse de café fumant.\"",
+                "tag-new": "Nouveauté",
+                "link-read": "Lire sur Wattpad",
+                "tag-ital-lit": "Littérature Italienne",
+                "review-calvino": "\"Un voyage poétique entre imagination et réalité. Parfait à savourer avec un expresso le matin.\"",
+                "tag-recommended": "Recommandé",
+                "tag-classic": "Classique",
+                "tag-contemp": "Fiction Contemporaine",
+                "review-ferrante": "\"Une histoire captivante sur l'amitié et la croissance. Impossible de se détacher de ces pages.\"",
+                "hours-subtitle": "Venez nous Rendre Visite",
+                "hours-title": "Horaires & Informations",
+                "opening-hours-title": "Heures d'Ouverture",
+                "days-week": "Lundi - Vendredi",
+                "days-sat": "Samedi",
+                "days-sun": "Dimanche",
+                "location-title": "Où Sommes-nous",
+                "footer-desc": "Un lieu de rencontre entre culture, goût et tranquillité au cœur de Sardara.",
+                "footer-director": "Sous la direction de Michela Mereu",
+                "copyright": "© By Grego Prioli 2026 Caffè & Pagine. Tous droits réservés."
+            }
+        };
+
+        // Custom Dropdown & Translation Engine Logic
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLangText = document.getElementById('currentLangText');
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('active');
+        });
+
+        langDropdown.querySelectorAll('li').forEach(item => {
+            item.addEventListener('click', () => {
+                const selectedLang = item.getAttribute('data-lang');
+                const selectedFlag = item.getAttribute('data-flag');
+                
+                currentFlag.src = selectedFlag;
+                currentLangText.textContent = selectedLang.toUpperCase();
+                
+                translatePage(selectedLang);
+                document.documentElement.lang = selectedLang;
+                langDropdown.classList.remove('active');
+            });
+        });
+
+        function translatePage(lang) {
+            const langData = translations[lang];
+            if (!langData) return;
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (langData[key]) {
+                    element.textContent = langData[key];
+                }
+            });
+        }
     </script>
 </body>
 </html>
